@@ -1,0 +1,41 @@
+:root {
+  --theme-color: #dc143c;
+
+  --theme-color-dark16: #000000;
+  --theme-color-dark15: #0d0103;
+  --theme-color-dark14: #1b0207;
+  --theme-color-dark13: #29030b;
+  --theme-color-dark12: #37050f;
+  --theme-color-dark11: #440612;
+  --theme-color-dark10: #520716;
+  --theme-color-dark09: #60081a;
+  --theme-color-dark08: #6e0a1e;
+  --theme-color-dark07: #7b0b21;
+  --theme-color-dark06: #890c25;
+  --theme-color-dark05: #970d29;
+  --theme-color-dark04: #a50f2d;
+  --theme-color-dark03: #b21030;
+  --theme-color-dark02: #c01134;
+  --theme-color-dark01: #ce1238;
+
+  --theme-color01: #de2248;
+  --theme-color02: #e03154;
+  --theme-color03: #e24060;
+  --theme-color04: #e44e6c;
+  --theme-color05: #e65d78;
+  --theme-color06: #e96c85;
+  --theme-color07: #eb7a91;
+  --theme-color08: #ed899d;
+  --theme-color09: #ef98a9;
+  --theme-color10: #f1a6b5;
+  --theme-color11: #f4b5c2;
+  --theme-color12: #f6c4ce;
+  --theme-color13: #f8d2da;
+  --theme-color14: #fae1e6;
+  --theme-color15: #fcf0f2;
+  --theme-color16: #ffffff;
+
+  --theme-color-pale01: #fdf3f5;
+  --theme-color-pale02: #fdf7f8;
+  --theme-color-pale03: #fefafb;
+}

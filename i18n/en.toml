@@ -1,0 +1,23 @@
+[table_of_contents]
+other = "Table of Contents"
+
+[category]
+other = "category"
+
+[tag]
+other = "tag"
+
+[page_not_found]
+other = "Page not found"
+
+[page_does_not_exist]
+other = "Sorry, this page does not exist."
+
+[comments]
+other = "Comments"
+
+[send]
+other = "Send"
+
+[not_available]
+other = "not available"

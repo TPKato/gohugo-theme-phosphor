@@ -1,0 +1,37 @@
+{{ define "main" }}
+
+<div class="article-title">
+  <h1>{{ .Title }}</h1>
+
+  {{- $date := .Date -}}
+  {{- $lmod := .Lastmod -}}
+
+  {{- with $date -}}
+  <div class="publishdate">
+  <span class="date"><i class="fas fa-clock"></i>&nbsp;{{- $date.Format (or $.Site.Params.dateFormat "Jan 2, 2006") -}}</span>
+
+  {{- if not (eq $date $lmod) -}}
+  <span class="date"><i class="fas fa-sync-alt"></i>&nbsp;{{- $lmod.Format (or $.Site.Params.dateFormat "Jan 2, 2006") -}}</span>
+  {{- end -}}
+  </div>
+  {{- end -}}
+</div>
+
+<div class="contents-box">
+  <div class="sidebar">
+    {{- partial "sidebar.html" . -}}
+  </div>
+  <div class="content">
+    <div class="article">
+      {{ .Content }}
+    </div>
+
+    {{- if (eq .Site.Params.Hashover.enable true) -}}
+    {{- if (not (and (isset .Params "hashover") (eq .Params.hashover false))) -}}
+    {{- partial "hashover.html" . -}}
+    {{- end -}}
+    {{- end -}}
+  </div>
+</div>
+
+{{ end }}

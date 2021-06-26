@@ -1,0 +1,36 @@
+{{- $page := .page -}}
+{{- $site := .site -}}
+{{- $class := .class -}}
+{{- $omithome := .omithome -}}
+{{- $showlang := .showlang -}}{{/* not tested */}}
+
+{{- if $class }}
+      <ul class="{{- $class -}}">
+{{- else -}}
+      <ul>
+{{- end }}
+
+{{- range .menu -}}
+{{- $is := $page.IsMenuCurrent "main" . -}}
+{{- $has := $page.HasMenuCurrent "main" . -}}
+{{- if (not (and $omithome $is)) }}
+        <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+  {{- if $showlang -}}
+  {{- with .Page -}}
+  {{- if .IsTranslated -}}
+  (
+  {{- range .Translations -}}
+  <a href="{{ .Permalink }}"><img src="/flags/{{- .Lang -}}.png" class="langname" alt="[{{- humanize .Lang -}}]"></a>
+  {{- end -}}
+  )
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+
+  {{- if .HasChildren }}
+  {{ partial "menu.html" (dict "menu" .Children "page" $page "site" $site "showlang" $showlang) }}
+  {{- end -}}
+</li>
+{{- end -}}
+{{- end }}
+      </ul>

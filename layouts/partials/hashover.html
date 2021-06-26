@@ -1,0 +1,9 @@
+{{ with .Site.Params.Hashover.url }}
+<script src="{{- . | absURL -}}"></script>
+<div class="comment">
+  <hr>
+  <h2>Comments</h2>
+
+  <div id="hashover"></div>
+</div>
+{{ end }}

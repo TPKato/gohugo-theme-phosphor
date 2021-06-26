@@ -1,0 +1,38 @@
+  <!-- toc -->
+  {{- $tocEnabled := true -}}
+  {{- if (isset .Site.Params.Phosphor "toc") -}}
+  {{- $tocEnabled = .Site.Params.Phosphor.toc -}}
+  {{- end -}}
+  {{- if (isset .Params "toc") -}}
+  {{- $tocEnabled = .Params.toc -}}
+  {{- end -}}
+
+  {{- if (eq $tocEnabled true) -}}
+
+  <!-- check if toc is empty -->
+  {{ $str := .TableOfContents }}
+  {{ $str = strings.TrimPrefix "<nav id=\"TableOfContents\">" $str }}
+  {{ $str = strings.TrimSuffix "</nav>" $str }}
+
+  {{ if (not (eq $str "")) }}
+  <div class="toc">
+    <div class="toc-title">
+      {{ i18n "table_of_contents" }}
+    </div>
+    <div class="toc-main">
+      {{ .TableOfContents }}
+    </div>
+  </div>
+  {{ end }}
+  {{ end }}
+
+  <!-- tags -->
+  {{ with .Params.tags }}
+  <div class="tags">
+    {{ range . -}}
+    <span class="tag">
+      <a class="tag" href="{{ ( printf "tags/%s/" ( . | urlize ) ) | relLangURL }}"><i class="fas fa-tag"></i>{{ . }}</a>
+    </span>
+    {{ end -}}
+  </div>
+  {{ end }}

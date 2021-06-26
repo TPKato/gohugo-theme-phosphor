@@ -1,0 +1,42 @@
+{{ define "main" }}
+
+<div class="article-title">
+  <h1>{{ .Title }}</h1>
+</div>
+
+<div class="contents-box">
+  <div class="sidebar">
+    <div class="tags">
+      {{ range .Site.Taxonomies.tags }}
+      <span class="tag">
+        <a class="tag" href="{{ .Page.Permalink }}"><i class="fas fa-tag"></i>{{ .Page.Title }}</a> ({{ .Count }})
+      </span>
+      {{ end }}
+    </div>
+  </div>
+  <div class="content">
+    <div class="content-container">
+      {{ .Content }}
+
+      {{- $pagelist := true -}}
+      {{- if (isset .Site.Params.Phosphor "pagelist") -}}
+      {{- $pagelist = .Site.Params.Phosphor.pagelist -}}
+      {{- end -}}
+      {{- if (isset .Params "pagelist") -}}
+      {{- $pagelist = .Params.pagelist -}}
+      {{- end -}}
+
+      {{- if $pagelist -}}
+      <div class="sitemap">
+        {{ range .Pages.ByWeight }}
+        <div class="sitemap-entry">
+          {{ partial "sectionmap.html" (dict "page" . "showTags" false) }}
+        </div>
+        {{ end -}}
+      </div>
+      {{ end -}}
+    </div>
+  </div>
+</div>
+
+{{ end }}

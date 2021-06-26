@@ -1,0 +1,191 @@
+  <title>
+    {{- if (and (eq .Type "tags") (eq .Kind "term")) -}}Tag: {{- .Title -}}
+    {{- else -}}
+    {{- with .Title -}} {{- . -}}
+    {{- end }} | {{ $.Site.Title -}} {{- end -}}
+  </title>
+
+  <meta charset="utf-8">
+  {{ hugo.Generator }}
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  {{- if .Site.Params.description }}
+  <meta name="description" content="{{ .Site.Params.description }}">
+  {{ end }}
+  {{- if .Site.Params.googleSiteVerify }}
+  <meta name="google-site-verification" content="{{ .Site.Params.googleSiteVerify }}">
+  {{- end -}}
+
+  {{- $coltheme := "blue" -}}
+  {{- with .Site.Params.Phosphor.colorTheme -}}
+  {{- $coltheme = . -}}
+  {{- end -}}
+  {{- $style := printf "css/phosphor-%s.css" $coltheme | resources.Get | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet"
+        href="{{ $style.Permalink }}"
+        integrity="{{ $style.Data.Integrity }}"
+        crossorigin="anonymous"
+        type="text/css">
+  {{ $style := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet"
+        href="{{ $style.Permalink }}"
+        integrity="{{ $style.Data.Integrity }}"
+        crossorigin="anonymous"
+        type="text/css">
+  {{ range .Site.Params.customCss }}
+  {{ $style := resources.Get . }}
+  {{ $minstyle := $style | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet"
+        href="{{ $minstyle.Permalink }}"
+        integrity="{{ $minstyle.Data.Integrity }}"
+        crossorigin="anonymous"
+        media="screen" />
+  {{ end }}
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+
+  <link rel="shortcut icon" href="{{ .Site.Params.favicon | absURL }}favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.favicon | absURL }}apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ .Site.Params.favicon | absURL }}favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ .Site.Params.favicon | absURL }}favicon-16x16.png">
+
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  {{ with .OutputFormats.Get "rss" -}}
+  {{- printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML -}}
+  {{- end }}
+
+  <!-- math -->
+  {{- if or (eq .Site.Params.math.enable true) (eq .Params.math true) -}}
+  {{- with .Site.Params.math -}}
+  {{- if and (isset . "use") (eq (.use | lower) "mathjax") -}}
+  <! -- mathjax -->
+  {{- $url := "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" -}}
+  {{- $hash := "sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" -}}
+  <script defer
+          type="text/javascript"
+          src="{{- $url -}}"
+          integrity="{{- $hash -}}"
+          crossorigin="anonymous"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+  </script>
+  {{- else -}}
+  <!-- katex -->
+  {{- $url := "https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" -}}
+  {{- $hash := "sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" -}}
+  <link rel="stylesheet"
+        href="{{- $url -}}"
+        integrity="{{- $hash -}}"
+        crossorigin="anonymous">
+  {{ $url := "https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" -}}
+  {{- $hash := "sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" }}
+  <script defer
+          src="{{- $url -}}"
+          integrity="{{- $hash -}}"
+          crossorigin="anonymous"></script>
+  {{ $url := "https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" -}}
+  {{- $hash := "sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" -}}
+  <script defer
+          src="{{- $url -}}"
+          integrity="{{- $hash -}}"
+          crossorigin="anonymous"
+          onload="renderMathInElement(document.body);"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        // customised options
+        delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\[', right: '\\]', display: true}
+        ],
+        // rendering keys
+        throwOnError : false
+      });
+    });
+  </script>
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+
+  {{- $js := "" -}}
+  {{- range .Site.Params.customJs -}}
+  {{- if or (in . "http://") (in . "https://") -}}
+  <script src="{{ . | relURL }}"></script>
+  {{- else -}}
+  {{- $customJS := resources.Get . -}}
+  {{- if $customJS -}}
+  {{- if eq $js "" -}}
+  {{- $js = $customJS -}}
+  {{- else -}}
+  {{- $js = slice $js $customJS | resources.Concat "js/custom.js" -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+  {{- if ne $js "" -}}
+  {{- $secureJS := $js | resources.Minify | resources.Fingerprint -}}
+  <script src="{{ $secureJS.Permalink }}"
+          integrity="{{ $secureJS.Data.Integrity }}"
+          crossorigin="anonymous"></script>
+  {{- end }}
+
+  <style>
+    {{ with .Site.Params.sitePicture -}}
+    .header {
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7)),
+        url({{ . | absURL }});
+    }
+    {{- end -}}
+
+    {{- with .Site.Params.bannerFont }}
+    @font-face {
+        font-family: "bannerFont";
+        src: url("{{- . | absURL -}}");
+    }
+    .header .header-title {
+        font-family: "bannerFont";
+    }
+    {{- end -}}
+
+    {{- with .Site.Params.bannerDescFont }}
+    @font-face {
+        font-family: "bannerDescFont";
+        src: url("{{- . | absURL -}}");
+    }
+    .header .header-description {
+        font-family: "bannerDescFont";
+    }
+    {{- end }}
+  </style>
+
+  <script>
+    window.addEventListener('load', function () {
+      let footnotes = document.querySelector('.footnotes');
+      if (footnotes) {
+        let element = document.createElement('h4');
+        let text = document.createTextNode('Footnotes:');
+        element.appendChild(text);
+        element.id = 'footnotes-label';
+        footnotes.insertBefore(element, footnotes.firstChild);
+
+        let hr = document.createElement('hr');
+        hr.id = 'footnotes-separator';
+        footnotes.insertBefore(hr, footnotes.firstChild);
+      }
+    })
+  </script>
+
+  {{- if (eq .Site.Params.Phosphor.hashoverEnable true) -}}
+  <!-- Hashover -->
+  {{- with .Site.Params.Phosphor.hashoverLoadCSS -}}
+  {{- $style := printf "css/%s" . | resources.Get | resources.Minify | resources.Fingerprint }}
+  <link rel="stylesheet"
+        href="{{ $style.Permalink }}"
+        integrity="{{ $style.Data.Integrity }}"
+        crossorigin="anonymous"
+        type="text/css">
+  {{- end -}}
+  {{- end }}

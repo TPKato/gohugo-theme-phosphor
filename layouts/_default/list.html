@@ -1,0 +1,58 @@
+{{ define "main" }}
+
+<div class="article-title">
+  <h1>
+    {{- if (and (eq .Type "tags") (eq .Kind "term")) -}}
+    <i class="fas fa-tag"></i>
+    {{- else if (eq .Type "categories") -}}
+    <i class="fas fa-folder"></i>
+    {{- end -}}
+    {{ .Title }}
+  </h1>
+</div>
+
+<div class="contents-box">
+  <div class="sidebar">
+  </div>
+
+  <div class="content">
+    <!-- taxonomies page -->
+    {{- if (or (eq .Type "tags") (eq .Type "categories")) }}
+    <ul class="taxonomy">
+      {{ range .Pages -}}
+      <li><a href="{{ .RelPermalink }}">
+          {{- if (and (eq .Type "tags") (eq .Kind "term")) -}}
+          <i class="fas fa-tag"></i>
+          {{- end -}}
+          {{ .Name }}</a></li>
+      {{ end -}}
+    </ul>
+
+    {{ else }}
+
+    <!-- section summary -->
+    <div class="archive">
+      {{ .Content }}
+    </div>
+
+    {{ $pagelist := true -}}
+    {{- if (isset .Site.Params.Phosphor "pagelist") -}}
+    {{- $pagelist = .Site.Params.Phosphor.pagelist -}}
+    {{- end -}}
+    {{- if (isset .Params "pagelist") -}}
+    {{- $pagelist = .Params.pagelist -}}
+    {{- end -}}
+    {{- if (eq $pagelist true) -}}
+    <div class="sitemap">
+      {{ range .Pages.ByWeight }}
+      <div class="sitemap-entry">
+        {{ partial "sectionmap.html" (dict "page" .Page) }}
+      </div>
+      {{ end }}
+    </div>
+    {{- end -}}
+    {{- end }}
+  </div>
+</div>
+
+{{ end }}

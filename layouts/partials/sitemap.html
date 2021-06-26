@@ -1,0 +1,35 @@
+{{- $site := .site -}}
+{{- $lang := .lang -}}
+{{- $showFirst := .showFirst -}}
+
+{{- if not .isNotTop }}
+<ul class="sitemap">
+{{ end -}}
+  {{- range .transkeys -}}
+  {{- $transkey := . -}}
+  <li class="sitemap-title-thislang">
+    {{ partial "sitemap-entry.html" (dict "site" $site "lang" $lang "transkey" . "showFirst" $showFirst) }}
+
+    {{ if (not (eq $transkey "home")) }}
+    {{- $subpages := slice -}}
+    {{- range $site.AllPages.ByWeight -}}
+    {{- $p := . -}}
+    {{- with .Parent -}}
+    {{- if (eq .TranslationKey $transkey) -}}
+    {{- $subpages = $subpages | append $p.TranslationKey | uniq -}}
+    {{- end -}}
+    {{- end -}}
+    {{- end -}}
+
+    {{- with $subpages -}}
+    <ul class="sitemap-child">
+      {{- partial "sitemap.html" (dict "transkeys" $subpages "site" $site "lang" $lang "isNotTop" true "showFirst" $showFirst) -}}
+    </ul>
+    {{- end -}}
+    {{- end -}}
+  </li>
+  {{ end }}
+
+{{ if not .isNotTop }}
+</ul>
+{{ end }}

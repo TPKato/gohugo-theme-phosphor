@@ -1,0 +1,29 @@
+<div class="header">
+  <div class="header-siteinfo">
+    <span class="header-title">{{- .Site.Title -}}</span>
+    <br>
+    <span class="header-description">{{- .Site.Params.Description -}}</span>
+  </div>
+</div>
+
+<div class="menubar">
+  <div class="dropdownmenu">
+    {{- partial "menu.html" (dict "menu" .Site.Menus.main "page" . "site" .Site "class" "dropdown") -}}
+  </div>
+
+  <div class="translations">
+    {{ $siteLanguages := .Site.Languages -}}
+    {{- $pageLang := .Page.Lang -}}
+    {{- range .Page.AllTranslations -}}
+    {{- $translation := . -}}
+    {{- range $siteLanguages -}}
+    {{- if eq $translation.Lang .Lang -}}
+    {{- $selected := false -}}
+    {{- if ne $pageLang .Lang -}}
+    <a href="{{- $translation.RelPermalink -}}"><img src="/flags/{{- .Lang -}}.svg" class="langname" alt="[{{- humanize .Lang -}}]"></a>
+    {{ end -}}
+    {{- end -}}
+    {{- end -}}
+    {{- end }}
+  </div>
+</div>

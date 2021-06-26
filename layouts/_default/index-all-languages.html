@@ -1,0 +1,31 @@
+{{ define "main" }}
+
+<div class="article-title">
+  <h1>{{ .Title }}</h1>
+</div>
+
+<div class="contents-box">
+  <div class="sidebar">
+  </div>
+
+  <div class="content">
+    <div class="content-container">
+      {{ .Content }}
+    </div>
+
+    {{ $tks := slice "home" }}
+    {{ range where .Site.AllPages.ByWeight "IsSection" true }}
+    {{ $tks = $tks | append .FirstSection.TranslationKey | uniq }}
+    {{ end }}
+
+    <div class="sitemap">
+      {{ range $tks }}
+      <div class="sitemap-entry">
+        {{ partial "sitemap.html" (dict "transkeys" (slice .) "site" $.Site "lang" $.Page.Language "showFirst" true) }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{ end }}

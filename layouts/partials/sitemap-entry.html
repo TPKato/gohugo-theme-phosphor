@@ -1,0 +1,42 @@
+{{- $site := .site -}}
+{{- $lang := .lang -}}
+{{- $tk := .transkey }}
+{{- $showFirst := .showFirst }}
+
+<!-- create a dictionary ([lang page]) -->
+{{- $pages := dict -}}
+{{- range where $site.AllPages.ByWeight "TranslationKey" $tk -}}
+{{- $pages = (merge $pages (dict (string .Language) .)) -}}
+{{- end -}}
+
+{{- with (index $pages (string $lang)) -}}
+<span class="sitemap-title-thislang"><a href="{{- .RelPermalink -}}">{{- .Title -}}</a></span>
+{{- else -}}
+
+{{- if $showFirst -}}
+  {{- $found := false -}}
+  {{- range $site.Languages -}}
+  {{- $l := . -}}
+  {{- with (index $pages (string .)) -}}
+  {{- $found := true -}}
+  <i>({{- .Title -}})</i>
+  {{- end -}}
+  {{- end -}}
+{{- else -}}
+  <span class="sitemap-title-thislang sitemap-title-nothislang">{{- i18n "not_available" -}}</span>
+{{- end -}}
+
+{{- end -}}
+
+<ul class="sitemap-translations">
+  {{- range $site.Languages -}}
+  {{- $l := . -}}
+  {{- if (not (eq . $lang)) -}}
+  {{- with (index $pages (string .)) -}}
+  <li><span class="sitemap-translation"><a href="{{- .RelPermalink -}}">{{- .Title }} ({{ $l -}})</a></span></li>
+  {{- else -}}
+  <li><span class="sitemap-translation sitemap-translation-notranslation">no translation for {{ $l -}}</span></li>
+  {{- end -}}
+  {{- end -}}
+  {{- end -}}
+</ul>

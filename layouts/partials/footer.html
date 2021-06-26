@@ -1,0 +1,17 @@
+  <div class="footer">
+    <div class="copyright">
+      {{ .Site.Title -}}
+      &nbsp;&copy;&nbsp;
+      {{- with .Site.Params.copyrightFrom }}
+      {{- if eq (string .) (now.Format "2006") }}
+      {{- . }}
+      {{- else }}
+      {{- . }}-{{ now.Format "2006" }}
+      {{- end }}
+      {{- else }}
+      {{- now.Format "2006"}}
+      {{- end }}
+      &nbsp;
+      {{- .Site.Params.author }}
+    </div>
+  </div>

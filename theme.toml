@@ -1,0 +1,12 @@
+name = "Phosphor"
+license = "MIT"
+licenselink = "https://github.com/TPKato/gohugo-theme-phosphor/blob/master/LICENSE"
+description = "Phosphor is a minimalist hugo theme."
+homepage = "https://github.com/TPKato/gohugo-theme-phosphor"
+tags = ["minimalist", "minimal", "personal"]
+features = ["math"]
+min_version = "0.59.1"
+
+[author]
+  name = "Takashi P. KATO(H)"
+  homepage = "https://www.chinpui.org/hack/"

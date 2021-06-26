@@ -1,0 +1,34 @@
+* Phosphor - Hugo theme
+
+** IMPORTANT NOTICE
+
+   This theme is work-in-progress.
+   Significant changes may occur.
+
+** LIMITATIONS
+
+   - I check this theme only with ~.org~ files.
+   - Some features are implemented but not tested well (e.g. MathJax)
+
+** Install the theme
+
+#+begin_src
+hugo new site [sitename]
+cd [sitename]
+git init
+git submodule add https://github.com/TPKato/gohugo-theme-phosphor.git theme/phosphor
+(or git clone https://github.com/TPKato/gohugo-theme-phosphor.git theme/phosphor )
+
+echo 'theme = "phosphor"' >> config.toml
+#+end_src
+   
+** Configuration
+
+   See config-sample.toml
+
+** License
+
+   This software (except files in ~static/flags/~) is released under the MIT License.
+   See ~LICENSE~ file.
+
+   The files in ~static/flags/~ are in the public domain.

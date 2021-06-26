@@ -1,0 +1,39 @@
+{{- $page := .page -}}
+{{- $showTags := .showTags -}}
+
+{{- if not .isNotTop }}
+<ul class="sitemap">
+{{- end -}}
+
+  {{- with $page }}
+  <li class="sitemap-title-thislang">
+    <span class="sitemap-title-thislang"><a href="{{.Permalink}}">{{.Title}}</a></span>
+    {{- if $showTags -}}
+    {{- if .Params.tags }}
+    <div>
+      {{ range .Params.tags -}}
+      <span class="tag" style="padding-right: 10px; font-size: 80%">
+        <a class="tag" href="{{- ( printf "tags/%s/" ( . | urlize ) ) | relLangURL -}}"><i class="fas fa-tag"></i>{{- . -}}</a>
+      </span>
+      {{ end -}}
+    </div>
+    {{- end -}}
+    {{- end }} <!-- showTags -->
+
+    <div class="sitemap-description">
+      {{- .Description -}}
+    </div>
+
+    {{ if .Pages -}}
+    <ul class="sitemap-child">
+      {{- range .Pages.ByWeight -}}
+      {{- partial "sectionmap.html" (dict "page" . "isNotTop" true "showTags" $showTags) -}}
+      {{- end -}}
+    </ul>
+    {{- end -}}
+  </li>
+  {{- end -}}
+
+{{- if not .isNotTop -}}
+</ul>
+{{- end }}

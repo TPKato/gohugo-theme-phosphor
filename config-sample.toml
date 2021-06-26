@@ -1,0 +1,48 @@
+# baseURL = "http://example.com/"
+
+title = "Title of your site"
+theme = "phosphor"
+
+[Params]
+	description = "Description of your site"
+	author = "Author"
+
+	copyrightFrom = 2021
+	sitePicture = "images/profile.jpg"
+
+	## Additional CSS file(s). Place .css file(s) in assets/
+	# customCss = [ "css/additional1.css", "css/addtional2.css" ]
+
+	## Additional JavaScript file(s)
+	# customJs = [ "...", "..." ]
+
+	## Fonts. Put the font files in static/ (in this example, in static/fonts/)
+	# bannerFont = "fonts/bannerfont.woff"
+	# bannerDescFont = "fonts/bannerdescfont.woff"
+
+[Params.Phosphor]
+	colorTheme = 'blue'			# blue (default), red, green, yellow
+
+	## Table of contents (default: true)
+	## You can also override this via toc-Parameter in the front matter
+	toc = true
+
+	## Page summary in list pages (default: true)
+	## You can override this via toc-Parameter of the front matter
+	pagelist = true
+
+[Params.math]
+	enable = true
+	use = "katex"				# katex or mathjax (default: katex)
+
+
+# ------------------------------------------------------------
+# syntax-highlighting
+#
+# see:
+#   https://gohugo.io/getting-started/configuration-markup#highlight
+#   https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
+#
+# [markup]
+#   [markup.highlight]
+# 	style = "pygments"
