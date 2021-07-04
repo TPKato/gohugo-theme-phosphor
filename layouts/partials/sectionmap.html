@@ -21,7 +21,7 @@
     {{- end }} <!-- showTags -->
 
     <div class="sitemap-description">
-      {{- .Description -}}
+      {{- .Description | $page.RenderString -}}
     </div>
 
     {{ if .Pages -}}

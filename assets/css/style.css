@@ -591,6 +591,10 @@ ul.taxonomy > li {
 /* ------------------------------------------------------------ */
 /* sitemap */
 
+div.sitemap {
+    margin-top: 1.5rem;
+}
+
 div.sitemap-entry {
     border-left: 3px solid var(--sitemap-border-color);
     background-color: var(--sitemap-bg-color);
