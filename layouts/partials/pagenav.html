@@ -1,0 +1,21 @@
+<div style="display: table; width: 100%">
+
+<span style="display: table-cell; text-align: left; width: 33%;">
+{{- with .NextInSection -}}
+<i class="fas fa-backward"></i>&nbsp;<a href="{{ .Permalink }}">{{ .Title }}</a>
+{{- end -}}
+</span>
+
+<span style="display: table-cell; text-align: center; width: 34%;">
+{{- with .Parent -}}
+<i class="fas fa-caret-up"></i>&nbsp;<a href="{{ .Permalink }}">{{ .Title }}</a>
+{{- end -}}
+</span>
+
+<span style="display: table-cell; text-align: right; width 33%;">
+{{- with .PrevInSection -}}
+<a href="{{ .Permalink }}">{{ .Title }}</a>&nbsp;<i class="fas fa-forward"></i>
+{{- end -}}
+</span>
+
+</div>

@@ -1,5 +1,15 @@
 {{ define "main" }}
 
+{{- $pagenavhead := .Site.Params.pagenavhead -}}
+{{- if (isset .Params "pagenavhead") -}}{{- $pagenavhead = .Params.pagenavhead -}}{{- end -}}
+{{- if $pagenavhead -}}
+<div class="pagenavbox">
+<div class="pagenav pagenavhead">
+  {{- partial "pagenav.html" . -}}
+</div>
+</div>
+{{- end -}}
+
 <div class="article-title">
   <h1>{{ .Title }}</h1>
 
@@ -34,4 +44,14 @@
   </div>
 </div>
 
-{{ end }}
+{{- $pagenavfoot := .Site.Params.pagenavfoot -}}
+{{- if (isset .Params "pagenavfoot") -}}{{- $pagenavfoot = .Params.pagenavfoot -}}{{- end -}}
+{{- if $pagenavfoot -}}
+<div class="pagenavbox">
+<div class="pagenav pagenavfoot">
+  {{- partial "pagenav.html" . -}}
+</div>
+</div>
+{{- end -}}
+
+{{- end -}}
