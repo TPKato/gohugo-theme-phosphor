@@ -575,6 +575,11 @@ span.tag {
     .article-title {
         margin-bottom: 2em;
     }
+
+    .toc {
+	padding: 6px;
+	margin: 0 0 1rem 0;
+    }
 }
 
 /* ------------------------------------------------------------ */
