@@ -14,7 +14,11 @@
 {{- $is := $page.IsMenuCurrent "main" . -}}
 {{- $has := $page.HasMenuCurrent "main" . -}}
 {{- if (not (and $omithome $is)) }}
-        <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a>
+        <li><a href="{{ .URL | relLangURL }}">{{ .Name }}
+	    {{- if (and .HasChildren (not $class)) -}}
+	    <span class="menuHasChildren" style="float: right; font-size: 150%"><i class="fas fa-caret-right"></i></span>
+	    {{- end -}}
+	  </a>
   {{- if $showlang -}}
   {{- with .Page -}}
   {{- if .IsTranslated -}}
