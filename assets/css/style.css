@@ -726,3 +726,45 @@ div.pagenav {
 div.pagenavhead {
     margin: 1em 0 0 0;
 }
+
+/* ------------------------------------------------------------ */
+/* TODO items */
+
+ul li.checked {
+    list-style-type: none !important;
+}
+
+ul li.checked::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    content: "\f14a"; /* fa-check-square */
+    position: absolute;
+    margin-left: -1.3em;
+    margin-top: 1px;
+}
+
+ul li.unchecked {
+    list-style-type: none !important;
+}
+
+ul li.unchecked::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    content: "\f0c8"; /* fa-square */
+    position: absolute;
+    margin-left: -1.3em;
+    margin-top: 1px;
+}
+
+ul li.indeterminate {
+    list-style-type: none !important;
+}
+
+ul li.indeterminate::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 400;
+    content: "\f146"; /* fa-minus-square */
+    position: absolute;
+    margin-left: -1.3em;
+    margin-top: 1px;
+}
