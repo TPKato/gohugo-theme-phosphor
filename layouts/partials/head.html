@@ -60,7 +60,7 @@
   {{- if or (eq .Site.Params.math.enable true) (eq .Params.math true) -}}
   {{- with .Site.Params.math -}}
   {{- if and (isset . "use") (eq (.use | lower) "mathjax") -}}
-  <! -- mathjax -->
+  <!-- mathjax -->
   {{- $url := "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" -}}
   {{- $hash := "sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" -}}
   <script defer
@@ -95,14 +95,12 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       renderMathInElement(document.body, {
-        // customised options
         delimiters: [
           {left: '$$', right: '$$', display: true},
           {left: '$', right: '$', display: false},
           {left: '\\[', right: '\\]', display: true}
         ],
-        // rendering keys
-        throwOnError : false
+        throwOnError: false // rendering keys
       });
     });
   </script>
