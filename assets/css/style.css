@@ -84,7 +84,7 @@ body {
     color: var(--body-color);
     font-size: 15px;
     width: 100%;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
     background-color: var(--bg-color);
 }
 
@@ -108,6 +108,10 @@ h2 {
     margin-top: 1em;
     font-size: 1.5em;
     border-bottom: 3px dotted;
+}
+
+h2#headline-1 {
+    margin-top: 0;
 }
 
 .comment h2 {
@@ -530,6 +534,7 @@ body {
 
 .sidebar {
     margin: 0;
+    margin-bottom: 1em;
     display: flex;
     flex-direction: column-reverse;
 }
@@ -565,7 +570,7 @@ span.tag {
 }
 
 .article li {
-    padding-bottom: 0em;
+    padding-bottom: 0;
 }
 
 /* ------------------------------------------------------------ */
@@ -637,13 +642,13 @@ ul.sitemap {
 
 ul.sitemap-translations {
     list-style: none;
-    margin-bottom: 0em;
+    margin-bottom: 0;
     padding: 0;
 }
 
 ul.sitemap-child {
     list-style: none;
-    margin-bottom: 0em;
+    margin-bottom: 0;
     padding: 0;
     padding-left: 20px;
 }
