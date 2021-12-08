@@ -1,5 +1,12 @@
 {{ define "main" }}
 
+{{- $showDraft := false -}}
+{{- if (eq site.Params.draftmark true) -}}
+{{- $showDraft = "[Draft]" -}}
+{{- else -}}
+{{- $showDraft = site.Params.draftmark -}}
+{{- end -}}
+
 {{- $pagenavhead := .Site.Params.pagenavhead -}}
 {{- if (isset .Params "pagenavhead") -}}{{- $pagenavhead = .Params.pagenavhead -}}{{- end -}}
 {{- if $pagenavhead }}
@@ -11,7 +18,11 @@
 {{- end }}
 
 <div class="article-title">
-  <h1>{{ .Title }}</h1>
+  <h1>{{ .Title }}
+    {{- if (and $showDraft .Draft) -}}
+    <span class="draftmark draftmark-article">{{- $showDraft -}}</span>
+    {{- end -}}
+  </h1>
 
   {{- $date := .Date -}}
   {{- $lmod := .Lastmod -}}

@@ -1,13 +1,24 @@
 {{- $page := .page -}}
 {{- $showTags := .showTags -}}
 
+{{- $showDraft := false -}}
+{{- if (eq site.Params.draftmark true) -}}
+{{- $showDraft = "[Draft]" -}}
+{{- else -}}
+{{- $showDraft = site.Params.draftmark -}}
+{{- end -}}
+
 {{- if not .isNotTop }}
 <ul class="sitemap">
 {{- end -}}
 
   {{- with $page }}
   <li class="sitemap-title-thislang">
-    <span class="sitemap-title-thislang"><a href="{{.Permalink}}">{{.Title}}</a></span>
+    <span class="sitemap-title-thislang"><a href="{{.Permalink}}">{{.Title}}</a>
+      {{- if (and $showDraft .Draft) -}}
+      <span class="draftmark draftmark-sitemap">{{- $showDraft -}}</span>
+      {{- end -}}
+    </span>
     {{- if $showTags -}}
     {{- if .Params.tags }}
     <div>

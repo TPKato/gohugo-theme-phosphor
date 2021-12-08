@@ -20,6 +20,13 @@ theme = "phosphor"
 	# bannerFont = "fonts/bannerfont.woff"
 	# bannerDescFont = "fonts/bannerdescfont.woff"
 
+	## add mark as draft if the page is a draft.
+	## If it is true, the default string is used.
+	## You can also specify your own string.
+	## default: false
+	draftmark = true
+	# draftmark = "DRAFT"
+
 [Params.Phosphor]
 	colorTheme = 'blue'			# blue (default), red, green, yellow
 
