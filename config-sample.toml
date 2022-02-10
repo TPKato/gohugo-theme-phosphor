@@ -43,6 +43,21 @@ theme = "phosphor"
 	pagenavhead = true
 	pagenavfoot = true
 
+	## Font Awesome
+	## (checked only with Font Awesome 6.0.0)
+	##
+	## If you want to use Font Awesome installed on your host (not via CDN),
+	## specify the following setting. (default: via CDN)
+	## Install css/all.css (or css/all.min.css) and webfonts/ in
+	## some directory in static/ .
+	## e.g.:
+	##   static/fa/css/all.css
+	##   static/fa/webfonts/*.{woff2,ttf}
+	## The relative path for webfonts/ should be ../webfonts/ from css directory.
+	## see also: https://fontawesome.com/docs/web/setup/host-yourself/webfonts
+	## If you installed your files in static/, specify "css/all.css" (without "fa/").
+	# faLocal = "fa/css/all.css"     # or "fa/all.min.css"
+
 [Params.math]
 	enable = true
 	use = "katex"				# katex or mathjax (default: katex)
