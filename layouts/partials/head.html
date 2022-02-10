@@ -77,6 +77,15 @@
   </script>
   {{- else -}}
   <!-- katex -->
+  {{- with .katexLocal -}}
+  {{- $min := "" -}}
+  {{- if (eq $.Site.Params.math.katexLocalUseMinified true) -}}
+  {{- $min = ".min" -}}
+  {{- end -}}
+  <link rel="stylesheet" href="{{- path.Join "/" . (delimit (slice "katex" $min ".css") "") -}}">
+  <script defer src="{{- path.Join "/" . (delimit (slice "katex" $min ".js") "") -}}"></script>
+  <script defer src="{{- path.Join "/" . "contrib" (delimit (slice "auto-render" $min ".js") "") -}}" onload="renderMathInElement(document.body);"></script>
+  {{- else -}}
   {{- $url := "https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css" -}}
   {{- $hash := "sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn" -}}
   <link rel="stylesheet"
@@ -96,6 +105,7 @@
           integrity="{{- $hash -}}"
           crossorigin="anonymous"
           onload="renderMathInElement(document.body);"></script>
+  {{- end }}
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       renderMathInElement(document.body, {

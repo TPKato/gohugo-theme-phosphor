@@ -61,6 +61,12 @@ theme = "phosphor"
 [Params.math]
 	enable = true
 	use = "katex"				# katex or mathjax (default: katex)
+	## If you want to use KaTeX installed on your host (not via CDN),
+	## specify the following settings. (default: via CDN)
+	## Install KaTeX-files in some directory in static/ .
+	## Don't forget to install (copy) contrib/ .
+	# katexLocal = "katex/"		# or "/" if you installed your files in static/
+	# katexLocalUseMinified = true	# if you want to use minified version
 
 
 # ------------------------------------------------------------
