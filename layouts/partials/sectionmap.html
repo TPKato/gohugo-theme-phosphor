@@ -1,5 +1,6 @@
 {{- $page := .page -}}
 {{- $showTags := .showTags -}}
+{{- $showDesc := default true .showDesc -}}
 
 {{- $showDraft := false -}}
 {{- if (eq site.Params.draftmark true) -}}
@@ -19,7 +20,7 @@
       <span class="draftmark draftmark-sitemap">{{- $showDraft -}}</span>
       {{- end -}}
     </span>
-    {{- if $showTags -}}
+    {{ if $showTags -}}
     {{- if .Params.tags }}
     <div>
       {{ range .Params.tags -}}
@@ -31,20 +32,22 @@
     {{- end -}}
     {{- end }} <!-- showTags -->
 
+    {{- if eq $showDesc true -}}
     <div class="sitemap-description">
       {{- .Description | $page.RenderString -}}
     </div>
+    {{- end -}}
 
     {{ if .Pages -}}
     <ul class="sitemap-child">
       {{- range .Pages.ByWeight -}}
-      {{- partial "sectionmap.html" (dict "page" . "isNotTop" true "showTags" $showTags) -}}
+      {{- partial "sectionmap.html" (dict "page" . "isNotTop" true "showTags" $showTags "showDesc" $showDesc) -}}
       {{- end -}}
     </ul>
     {{- end -}}
   </li>
   {{- end -}}
 
-{{- if not .isNotTop -}}
+{{- if not .isNotTop }}
 </ul>
 {{- end }}
